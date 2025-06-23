@@ -1,3 +1,5 @@
+#include "var.h"
+#include <string.h>
 
 int scan_dir(char *path_to_scan, /*data structure*/ ){
 
@@ -16,8 +18,34 @@ int scan_dir(char *path_to_scan, /*data structure*/ ){
     }
     // if *de point to another directory
     else if(de->d_type == DT_DIR){
-      // make a function that merge the name of the new dir whit the old one
-      scan_dir(//...);
+      make_path(path_to_scan, de->d_name);
+      scan_dir(path_to_scan);
     }
   }
+}
+
+void make_path(char *dir, char *sub_dir){
+  unsigned short i, j, dim1, dim2;
+
+  dim1 = strlen(dir);
+  dim1 = strlen(dir);
+
+  // if there is enought space
+  if((MAX_PATH_LENGTH-dim1i) > (dim2+1)){
+    i = 0;
+    j = 0;
+    while(*(dir+i) != '\0'){
+      i++;
+    }
+    *(dir+i) = '/';
+    // copy in the subdirectory
+    while(*(sub_dir+j) != '\0'){
+      *(dir+i) = *(sub_dir+j);
+      i++;
+      j++;
+    }
+    *(sub_dir+j) = '\0';
+  }
+  else
+    printf("buffer finished!\n");
 }
