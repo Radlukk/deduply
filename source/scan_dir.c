@@ -1,7 +1,7 @@
 #include "var.h"
 #include <string.h>
 
-int scan_dir(char *path_to_scan, /*data structure*/ ){
+int scan_dir(char *path_to_scan, file_list * h){
 
   struct dirent *de;
   DIR *dir;
@@ -15,6 +15,7 @@ int scan_dir(char *path_to_scan, /*data structure*/ ){
      // if *de point to a regular file
     if(de->d_type == DT_REG){
       // update data structure
+      h = append_file(h, de->d_name);
     }
     // if *de point to another directory
     else if(de->d_type == DT_DIR){

@@ -11,8 +11,11 @@ int main(int argc, char * argv[]){
   int i;
   char dir_path[MAX_PATH_LENGTH] = argv[argc - 1];
   char *files[MAX_FILES];
+  file_list *fls = NULL;
 
   for(i = 0; (i+1) < (argc-2); i++){
     files[i] = argv[i+1];
   }
+
+  scan_dir(dir_path, fls);
 }
