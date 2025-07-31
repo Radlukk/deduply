@@ -15,8 +15,9 @@ int scan_dir(char *path_to_scan, file_list * h){
      // if *de point to a regular file
     if(de->d_type == DT_REG){
       // update data structure
-      // more condition to value
-      h = append_file(h, de->d_name);
+      make_path(path_to_scan, de->d_name);
+      h = append_file(h, path_to_scan);
+      unmake_path(path_to_scan);
     }
     // if *de point to another directory
     else if(de->d_type == DT_DIR){
