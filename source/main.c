@@ -5,37 +5,25 @@
 
 int main(int argc, char * argv[]){
 
-  if(argc == 1){
+  if(argc < 3){
     printf("arguments missing!\ninput: deduply --help for more information\n"); // to write deduply --help
     return 0;
   }
 
-  int i;
-  char dir_path[MAX_PATH_LENGTH] = argv[argc - 1];
-  char *files[MAX_FILES];
+  // to be modified when I add more options
+  if(argc-2 > 10){
+    printf("too many arguments: max 10 files can be input\n");
+    return 0;
+  }
+
+  int i, fnum;
+  char dir_path[MAX_PATH_LENGTH+1] = argv[argc - 1]; // I coud add the option to look in the current working dir if nothing given
   file_list *fls = NULL;
+  unsigned char *hashs[32]; // the program can take max 10 files to compare
   FILE *fs;
 
-  for(i = 0; (i+1) < (argc-2); i++){
-    files[i] = argv[i+1];
-  }
-
-  if(!(fs = fopen(src, "r"))){
-    printf("Could not open %s", src);
-    return -1;
-  }
-
+  fnum = argc - 2;
+  get_src_files(argv, hashs, fnum);
   scan_dir(dir_path, fls);
-
-  // save all the hashs of the file to deduplicate
-  for(i = argc; i > 1; i--){
-    SHA256_CTX sha256;
-    int byte = 0;
-    while((byte = fread(buff, 1, sizeof(buff), fb)) > 0){
-      //digesting the hash step by step
-      SHA256_Update(&sha256, buff, byte);
-    }
-    // ho bisogno di una struttura dati per salvare gli hash
-    SHA256_Final(hash_base, &sha256);
-    }
+ 
 }
