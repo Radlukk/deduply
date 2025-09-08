@@ -1,14 +1,11 @@
-/* #include <stdlib.h>
- * #include <list.h>
- * #include <stdio.h> */
 
-lista_t * append(lista_t *head, int n){
+file_list * append(file_list *head, char *file){
 
-	lista_t *elem, *ptr;
-	elem = (lista_t *)malloc(sizeof(lista_t));
-	if (elem){
+	file_list *elem, *ptr;
+	elem = (file_list *)malloc(sizeof(file_list));
+	if(elem){
     elem->next = NULL;
-	  elem->num = n;
+	  strcpy(elem->file_name, file);
   }
   else{
     printf("errore di allocazione\n");
@@ -23,6 +20,6 @@ lista_t * append(lista_t *head, int n){
 	}
 	else {
 		head = elem;
-	} 
+	}
 	return head;
 }

@@ -1,6 +1,7 @@
-#include "var.h"
+#include <var.h>
 #include <string.h>
 
+// I could make the function return the number of succesful aquisition
 int scan_dir(char *path_to_scan, file_list * h){
 
   struct dirent *de;
@@ -8,7 +9,7 @@ int scan_dir(char *path_to_scan, file_list * h){
 
   if((dir = opendir(path_to_scan)) == NULL){
     printf("Could not open %s", path_to_scan);
-    return -1;
+    return 0;
   }
 
   while((de = readdir(dir)) != NULL){
@@ -26,6 +27,8 @@ int scan_dir(char *path_to_scan, file_list * h){
       unmake_path(path_to_scan);
     }
   }
+
+  return 1;
 }
 
 void make_path(char *dir, char *sub_dir){

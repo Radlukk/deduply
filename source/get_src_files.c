@@ -1,16 +1,15 @@
+#include <var.h>
+#include <chack_dirpath.h>
 
-get_src_files(char *argv[], unsigned char *hashs[], int fnum){
+void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
 
   int i, j;
-  char *files[MAX_FILES+1];
+  char *files[MAX_FILES];
   unsigned char buff[BUF_SIZE];
   FILE *fs;
 
   for(i = 0; i < fnum; i++){
     files[i] = argv[i+1];
-  }
-
-  if(!(fs = fopen(src, "r"))){
   }
 
   // save all the hashs of the files to deduplicate
