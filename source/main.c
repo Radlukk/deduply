@@ -25,8 +25,8 @@ int main(int argc, char * argv[]){
   fnum = argc - 2;
   get_src_files(argv, hashs, fnum);
 
-  if(!check_dir(dir_path) || !scan_dir(dir_path, fls)){
-    // ERROR
+  if(check_dir(dir_path) || scan_dir(dir_path, fls)){
+    perror("Error with the given path")
     return 0;
   }
 
@@ -35,7 +35,7 @@ int main(int argc, char * argv[]){
       tmp_hash = file_comp(argv[i+1], fls->file_name);
       if(!(strcmp(tmp_hash, hashs[i]))){
         if(remove(fls->file_name)){
-          printf("ERROR: %s can not be removed\n", fls->file_name)
+          fprintf(stderr, "ERROR: %s can not be removed\n", fls->file_name)
         }
       }
     }

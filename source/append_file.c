@@ -8,7 +8,7 @@ file_list * append(file_list *head, char *file){
 	  strcpy(elem->file_name, file);
   }
   else{
-    printf("errore di allocazione\n");
+    perror("Allocation Error");
     return head;
   }
 	if(head){

@@ -8,8 +8,9 @@ int scan_dir(char *path_to_scan, file_list * h){
   DIR *dir;
 
   if((dir = opendir(path_to_scan)) == NULL){
-    printf("Could not open %s", path_to_scan);
-    return 0;
+    // printf("Could not open %s", path_to_scan);
+    perror("Error")
+    exit(EXIT_FAILURE);
   }
 
   while((de = readdir(dir)) != NULL){
@@ -28,7 +29,7 @@ int scan_dir(char *path_to_scan, file_list * h){
     }
   }
 
-  return 1;
+  return 0;
 }
 
 void make_path(char *dir, char *sub_dir){

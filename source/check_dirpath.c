@@ -6,14 +6,15 @@ int check_dir(char *dir_path){
   DIR *dir;
 
   if((dir = opendir(dir_path)) == NULL){
-    printf("Could not open %s", dir_path);
-    return -1;
+    // printf("Could not open %s", dir_path);
+    perror("Error opening");
+    exit(-1);
   }
 
   // checking if the path lead to a dir
   if((de = readdir(dir) != NULL) && de->d_type == DT_DIR){
-    return 1;
+    exit(EXIT_SUCCESS);
   }
 
-  return 0;
+  return 1;
 }
