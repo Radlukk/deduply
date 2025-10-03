@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <openssl/sha.h>
+#include <stdlib.h>
+
+#include "appende_file.h"
+#include "check_dirpath.h"
+#include "file_comp.h"
+#include "get_src_files.h"
+#include "scan_dir.h"
 
 int main(int argc, char * argv[]){
 
@@ -17,7 +24,21 @@ int main(int argc, char * argv[]){
   }
 
   int i, fnum;
-  char dir_path[MAX_PATH_LENGTH] = argv[argc - 1]; // I coud add the option to look in the current working dir if nothing given
+  char *dir_path;
+  char *new_dir_path;
+  size_t size = MAX_PATH_LENGTH;
+ 
+  do
+    new_dir_path = realloc(dir_path, size);
+    if(new_dir_path == NULL){
+      perror("Problem with 'char *dir_path'");
+      return 0;
+    }
+    dir_path = new_dir_path;
+    size += MAX_PATH_LENGTH;
+  }
+  while(strcpy(dir_path));
+
   file_list *fls = NULL;
   unsigned char *hashs[MAX_FILES], tmp_hash[32]; // the program can take max 10 files to compare
   FILE *fs;
@@ -26,7 +47,7 @@ int main(int argc, char * argv[]){
   get_src_files(argv, hashs, fnum);
 
   if(check_dir(dir_path) || scan_dir(dir_path, fls)){
-    perror("Error with the given path")
+    perror("Error with the given path");
     return 0;
   }
 
@@ -35,7 +56,7 @@ int main(int argc, char * argv[]){
       tmp_hash = file_comp(argv[i+1], fls->file_name);
       if(!(strcmp(tmp_hash, hashs[i]))){
         if(remove(fls->file_name)){
-          fprintf(stderr, "ERROR: %s can not be removed\n", fls->file_name)
+          fprintf(stderr, "ERROR: %s can not be removed\n", fls->file_name);
         }
       }
     }

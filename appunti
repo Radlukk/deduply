@@ -1,0 +1,18 @@
+APPUNTI SU COSA FARE
+
+Devo completare il main aggiungendo le varie casistiche a seconda degli argomenti in
+ingresso.
+
+Costruisci una funzione che scannerizza e raccoglie i file. Salvali in una struttura
+dati opportuna. Creerò uno struct che salva il nome del file + altro, per avere una
+lista COMPLETA dei file della directory.
+
+Scrivi una funzione in scan_dir.c che mette insieme il nome della sottodir * dir-
+corrente.
+
+Sistema e scrivi tutti i messaggi di errore.
+
+DEBUGING
+
+Comincio leggendo il main e seguendo il percorso del codice.
+  - da sostituire i messaggi d'erroe con dei perror o comunque indirizzare allo stderr
