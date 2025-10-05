@@ -44,7 +44,7 @@ int main(int argc, char * argv[]){
   FILE *fs;
 
   // given for granted that the only arguments are the files and the dir
-  fnum = argc - ;
+  fnum = argc - 2;
   get_src_files(argv, hashs, fnum);
 
   if(check_dir(dir_path) || scan_dir(dir_path, fls)){
