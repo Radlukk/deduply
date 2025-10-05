@@ -43,7 +43,8 @@ int main(int argc, char * argv[]){
   unsigned char *hashs[MAX_FILES], tmp_hash[32]; // the program can take max 10 files to compare
   FILE *fs;
 
-  fnum = argc - 2;
+  // given for granted that the only arguments are the files and the dir
+  fnum = argc - ;
   get_src_files(argv, hashs, fnum);
 
   if(check_dir(dir_path) || scan_dir(dir_path, fls)){
