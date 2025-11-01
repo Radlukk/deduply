@@ -1,4 +1,7 @@
-#include "var.h"
+#include <var.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <stdlib.h>
 
 int check_dir(char *dir_path){
  

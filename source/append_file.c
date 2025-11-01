@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#include <var.h>
+#include <stdlib.h>
 
 file_list * append(file_list *head, char *file){
 
