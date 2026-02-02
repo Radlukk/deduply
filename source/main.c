@@ -4,7 +4,7 @@
 #include <openssl/sha.h>
 #include <stdlib.h>
 
-#include "appende_file.h"
+#include "append_file.h"
 #include "check_dirpath.h"
 #include "file_comp.h"
 #include "get_src_files.h"
@@ -28,7 +28,7 @@ int main(int argc, char * argv[]){
   char *new_dir_path;
   size_t size = MAX_PATH_LENGTH;
  
-  do
+  do{
     new_dir_path = realloc(dir_path, size);
     if(new_dir_path == NULL){
       perror("Problem with 'char *dir_path'");
@@ -37,11 +37,10 @@ int main(int argc, char * argv[]){
     dir_path = new_dir_path;
     size += MAX_PATH_LENGTH;
   }
-  while(strcpy(dir_path));
+  while(strcpy(dir_path, argv[argc-1]));
 
   file_list *fls = NULL;
   unsigned char *hashs[MAX_FILES], tmp_hash[32]; // the program can take max 10 files to compare
-  FILE *fs;
 
   // given for granted that the only arguments are the files and the dir
   fnum = argc - 2;
@@ -52,15 +51,13 @@ int main(int argc, char * argv[]){
     return 0;
   }
 
-  while(fls){
-    for(i = 0; i < fnum; i++){
-      tmp_hash = file_comp(argv[i+1], fls->file_name);
-      if(!(strcmp(tmp_hash, hashs[i]))){
-        if(remove(fls->file_name)){
-          fprintf(stderr, "ERROR: %s can not be removed\n", fls->file_name);
-        }
+  for(i = 0; i < fnum; i++){
+    file_comp(argv[i+1], fls->file_name, tmp_hash);
+    if(!(strcmp(tmp_hash, hashs[i]))){
+      if(remove(fls->file_name)){
+        fprintf(stderr, "ERROR: %s can not be removed\n", fls->file_name);
       }
     }
-  }
+  } 
   return 0;
 }

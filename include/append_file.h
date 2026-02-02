@@ -1,6 +1,6 @@
 #ifndef APPEND_FILE
 #define APPEND_FILE
 
-file_list * append(file_list *, char *);
+file_list * append_file(file_list *, char *);
 
 #endif

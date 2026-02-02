@@ -1,7 +1,14 @@
 #include <var.h>
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <errno.h>
+#include <append_file.h>
 
-// I could make the function return the number of succesful aquisition
+void unmake_path(char *);
+void make_path(char *, char *);
+
 int scan_dir(char *path_to_scan, file_list * h){
 
   struct dirent *de;
@@ -9,7 +16,7 @@ int scan_dir(char *path_to_scan, file_list * h){
 
   if((dir = opendir(path_to_scan)) == NULL){
     // printf("Could not open %s", path_to_scan);
-    perror("Error")
+    perror("Error");
     exit(EXIT_FAILURE);
   }
 
@@ -37,10 +44,10 @@ void make_path(char *dir, char *sub_dir){
   unsigned short i, j, dim1, dim2;
 
   dim1 = strlen(dir);
-  dim1 = strlen(dir);
+  dim2 = strlen(sub_dir);
 
   // if there is enought space
-  if((MAX_PATH_LENGTH-dim1i) > (dim2+1)){
+  if((MAX_PATH_LENGTH-dim1) > (dim2+1)){
     i = 0;
     j = 0;
     while(*(dir+i) != '\0'){

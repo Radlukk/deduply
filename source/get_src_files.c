@@ -1,5 +1,7 @@
 #include <var.h>
-#include <chack_dirpath.h>
+#include <stdio.h>
+#include <check_dirpath.h>
+#include <openssl/sha.h>
 
 void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
 
@@ -18,11 +20,11 @@ void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
   for(i = 0; i < fnum; i++){
     int byte;
     byte = 0;
-    if(check_dirpath(files[i])){
+    if(check_dir(files[i])){
       printf("%s is a directory not a file\n", files[i]);
     }
     else{
-      if((fs = fopen(src, "rb"))){
+      if((fs = fopen(files[i], "rb"))){
         SHA256_CTX sha256;
         SHA256_Init(&sha256);
         while((byte = fread(buff, 1, sizeof(buff), fs)) > 0){
