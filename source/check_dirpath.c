@@ -15,7 +15,7 @@ int check_dir(char *dir_path){
   }
 
   // checking if the path lead to a dir
-  if((de = readdir(dir) != NULL) && de->d_type == DT_DIR){
+  if((de = readdir(dir)) != NULL && de->d_type == DT_DIR){
     exit(EXIT_SUCCESS);
   }
 

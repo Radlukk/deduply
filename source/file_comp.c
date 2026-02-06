@@ -30,7 +30,7 @@ void file_comp(char *src, char *base, unsigned char *hash_base){
   }
 
   fseek(fb, 0L, SEEK_END);
-  szbase = ftell(fb);
+  szsrc = ftell(fb);
   fclose(fb);
 
   if(szbase != szsrc){

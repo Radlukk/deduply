@@ -3,7 +3,7 @@
 #include <var.h>
 #include <stdlib.h>
 
-file_list * append(file_list *head, char *file){
+file_list * append_file(file_list *head, char *file){
 
 	file_list *elem, *ptr;
 	elem = (file_list *)malloc(sizeof(file_list));

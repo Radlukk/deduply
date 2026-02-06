@@ -82,3 +82,5 @@ void unmake_path(char *dir){
   }
   *(dir+i) = '\0';
 }
+
+#include "append_file.c"
