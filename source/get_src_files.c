@@ -13,6 +13,7 @@ void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
   for(i = 0; i < fnum; i++){
     files[i] = argv[i+1];
   }
+  printf("All files got noted\n");
 
   // save all the hashs of the files to deduplicate
 
@@ -24,6 +25,7 @@ void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
       printf("%s is a directory not a file\n", files[i]);
     }
     else{
+      printf("hashing: %s", files[i]);
       if((fs = fopen(files[i], "rb"))){
         SHA256_CTX sha256;
         SHA256_Init(&sha256);

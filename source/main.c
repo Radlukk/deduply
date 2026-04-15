@@ -24,12 +24,12 @@ int main(int argc, char * argv[]){
   }
 
   int i, fnum;
-  char *dir_path;
-  char *new_dir_path;
+  char *dir_path = (char*)malloc(sizeof(char));
+  char *new_dir_path = NULL;
   size_t size = MAX_PATH_LENGTH;
  
   do{
-    new_dir_path = realloc(dir_path, size);
+    new_dir_path = (char*)realloc(dir_path, size);
     if(new_dir_path == NULL){
       perror("Problem with 'char *dir_path'");
       return 0;
@@ -37,7 +37,8 @@ int main(int argc, char * argv[]){
     dir_path = new_dir_path;
     size += MAX_PATH_LENGTH;
   }
-  while(strcpy(dir_path, argv[argc-1]));
+  while(!strcpy(dir_path, argv[argc-1]));
+  printf("dir_path succesfuly allocated\n");
 
   file_list *fls = NULL;
   unsigned char *hashs[MAX_FILES], tmp_hash[32]; // the program can take max 10 files to compare
