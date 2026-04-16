@@ -2,22 +2,32 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 int check_dir(char *dir_path){
- 
-  struct dirent *de;
-  DIR *dir;
 
-  if((dir = opendir(dir_path)) == NULL){
-    // printf("Could not open %s", dir_path);
-    perror("Error in dir evaluation");
-    return -1;
+  struct stat st;
+  int res;
+  res = -1;
+
+  printf("checking %s\n", dir_path);
+
+  if(stat(dir_path, &st) == -1){
+    perror("stat\n");
+    return res;
   }
 
   // checking if the path lead to a dir
-  if((de = readdir(dir)) != NULL && de->d_type == DT_DIR){
-    return 0;
+  if(S_ISDIR(st.st_mode)){
+    res = 0;
+    return res;
   }
 
-  return 1;
+  if(S_ISREG(st.st_mode)){
+    res = 1;
+    return res;
+  }
+
+  return res;
 }

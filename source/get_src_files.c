@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <check_dirpath.h>
 #include <openssl/sha.h>
+#include <errno.h>
 
 void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
 
@@ -21,10 +22,10 @@ void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
   for(i = 0; i < fnum; i++){
     int byte;
     byte = 0;
-    if(check_dir(files[i])){
+    if(check_dir(files[i]) == 0){
       printf("%s is a directory not a file\n", files[i]);
     }
-    else{
+    else if(check_dir(files[i]) == 1){
       printf("hashing: %s", files[i]);
       if((fs = fopen(files[i], "rb"))){
         SHA256_CTX sha256;
@@ -39,5 +40,9 @@ void get_src_files(char *argv[], unsigned char *hashs[], int fnum){
         printf("Could not open the file %s\n", files[i]);
       }
     }
+    else {
+      perror(files[i]);
+    }
   }
+  printf("All files got hashed\n");
 }

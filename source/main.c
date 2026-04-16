@@ -3,6 +3,7 @@
 #include <string.h>
 #include <openssl/sha.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include "append_file.h"
 #include "check_dirpath.h"
